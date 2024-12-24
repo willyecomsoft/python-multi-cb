@@ -68,3 +68,25 @@ results = order_cluster.query(
 
 ### cross cluster
 [cross_cluster.py](/cross_cluster.py)
+
+```
+def get_collection(cluster, bucket, scope, collection):
+    return (
+        cluster
+        .bucket(bucket)
+        .scope(scope)
+        .collection(collection)
+    )
+```
+
+```
+# order from `order`.`poc`.`data`
+order_id = "1"
+order_collection = get_collection(order_cluster, "order", "poc", "data")
+order = order_collection.get(order_id).content_as[dict]
+
+# color from `vector-sample`.`color`.`data`
+color_id = "000007e9-46af-49f0-b3ef-38ec5f9e697f"
+color_collection = get_collection(warehouse_db_cluster, "vector-sample", "color", "data")
+color = color_collection.get(color_id).content_as[dict]
+```
