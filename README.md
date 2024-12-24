@@ -16,6 +16,26 @@ WAREHOUSE_DB_PASSWORD=
 WAREHOUSE_DB_BUCKET=warehouse
 ```
 
+[order_db.py](/order_db.py)
+```
+order_conn_str = os.getenv("ORDER_DB_CONN_STR", 'localhost')
+order_username = os.getenv("ORDER_DB_USERNAME", 'Administrator')
+order_password = os.getenv("ORDER_DB_PASSWORD", 'couchbase')
+
+order_db_client = CouchbaseClient(order_conn_str, order_username, order_password)
+order_cluster = order_db_client.cluster
+```
+
+[warehouse_db.py](/warehouse_db.py)
+```
+warehouse_conn_str = os.getenv("WAREHOUSE_DB_CONN_STR", 'localhost')
+warehouse_username = os.getenv("WAREHOUSE_DB_USERNAME", 'Administrator')
+warehouse_password = os.getenv("WAREHOUSE_DB_PASSWORD", 'couchbase')
+
+warehouse_db_client = CouchbaseClient(warehouse_conn_str, warehouse_username, warehouse_password)
+warehouse_db_cluster = warehouse_db_client.cluster
+```
+
 
 ### cross bucket
 **method 1: 分別對不同的bucket query** <br>
